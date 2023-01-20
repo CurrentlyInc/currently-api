@@ -11,7 +11,7 @@ ENV PYTHONDONTWRITEBYTECODE=1
 # create root directory for our project in the container
 WORKDIR /app
 
-# Copy the current directory contents into the container at /music_service
+# Copy the current directory contents into the container at /app
 COPY . .
 
 # Install any needed packages specified in requirements.txt
