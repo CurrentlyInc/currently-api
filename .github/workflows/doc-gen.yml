@@ -37,7 +37,7 @@ jobs:
           cd ./docs/
           pip install -r requirements.txt
       - name: Generate Sphinx Docs
-        run: 
+        run: |
           cd ./docs/
           make html
       - name: Setup Pages
