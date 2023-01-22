@@ -19,7 +19,7 @@ concurrency:
 
 jobs:
 
-  # Build, Commit, Push, Deploy
+  # Deploy to 'github-pages' environment after generating sphinx docs with 'make html' in '/docs/'
   deploy:
     environment:
       name: github-pages
@@ -31,11 +31,14 @@ jobs:
       - name: Setup Python
         uses: actions/setup-python@v2
       - name: Install Dependencies
-        run: pip install sphinx sphinx-book-theme
+        run: |
+          pip install sphinx sphinx-book-theme
+          sudo apt update && sudo apt upgrade -y
+          sudo apt-get install python3-sphinx -y
       - name: Generate Sphinx Docs
-        uses: ammaraskar/sphinx-action@master
-        with:
-          docs-folder: "docs/"
+        run: |
+          cd ./docs/
+          make html
       - name: Setup Pages
         uses: actions/configure-pages@v2
       - name: Upload Artifact
