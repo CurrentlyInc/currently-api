@@ -1,5 +1,5 @@
 name: 'Build and Publish Docs'
-description: 'This action generates sphinx documentation and publishes it to GitHub pages after a push to the master branch'
+# description: 'This action generates sphinx documentation and publishes it to GitHub pages after a push to the master branch'
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
   contents: read
