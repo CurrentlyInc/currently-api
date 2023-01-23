@@ -1,17 +1,24 @@
 services: 
   postgres:
     image: postgres:latest
+    container_name: postgres
+    ports:
+      - "5432:5432"
     volumes:
-      - db:/var/lib/postgresql/data
+      - pgdata:/var/lib/postgresql/data
+
     environment:
       - POSTGRES_DB=${POSTGRES_DB}
       - POSTGRES_USER=${POSTGRES_USER}
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+    networks:
+      dev:
   api:
     build: .
-    command:  python ./api/manage.py runserver 0.0.0.0:8000
+    container_name: django-api
+    command:  python manage.py runserver 0.0.0.0:8000
     volumes:
-      - .:/app/
+      - ./api:/app/
     ports:
       - "8000:8000"
     environment:
@@ -20,7 +27,26 @@ services:
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
     depends_on:
       - postgres
+    networks:
+      dev:
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin4
+    volumes:
+      - pgadmin-data:/var/lib/pgadmin
+    ports:
+      - "5050:80"
+    environment:
+      - 'PGADMIN_DEFAULT_EMAIL=${PG_EMAIL}' 
+      - 'PGADMIN_DEFAULT_PASSWORD=${PG_PASSWORD}' 
+    depends_on:
+      - postgres
+    networks:
+     dev:
+networks:
+  dev:
 volumes:
-  db:
+  pgdata:
     driver: local
-  
+  pgadmin-data:
+    driver: local

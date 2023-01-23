@@ -1,4 +1,5 @@
-.env
-docker-compose.yaml
-Dockerfile
-readme.md
+**/*
+!api/*
+!*.dockerignore
+!requirements.txt
+data/*
