@@ -3,3 +3,5 @@ djangorestframework==3.14.0
 psycopg2==2.9.3 
 markdown==3.4.1
 django-filter==22.1 
+graphene-django==3.0.0
+graphene==3.2.1
