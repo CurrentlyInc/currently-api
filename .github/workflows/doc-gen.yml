@@ -1,54 +1,54 @@
-name: 'Build and Publish Docs'
-# This action generates sphinx documentation and publishes it to GitHub pages after a push to the master branch
+# name: 'Build and Publish Docs'
+# # This action generates sphinx documentation and publishes it to GitHub pages after a push to the master branch
 
-# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
-permissions:
-  contents: read
-  pages: write
-  id-token: write
+# # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+# permissions:
+#   contents: read
+#   pages: write
+#   id-token: write
 
-# execute this workflow automatically when a we push to master
-on:
-  push:
-    branches: [ master ]
+# # execute this workflow automatically when a we push to master
+# on:
+#   push:
+#     branches: [ master ]
 
-# Allow one concurrent deployment
-concurrency:
-  group: "pages"
-  cancel-in-progress: true
+# # Allow one concurrent deployment
+# concurrency:
+#   group: "pages"
+#   cancel-in-progress: true
 
-jobs:
+# jobs:
 
-  # Deploy to 'github-pages' environment after generating sphinx docs with 'make html' in '/docs/'
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-      - name: Setup Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.9.16' 
+#   # Deploy to 'github-pages' environment after generating sphinx docs with 'make html' in '/docs/'
+#   deploy:
+#     environment:
+#       name: github-pages
+#       url: ${{ steps.deployment.outputs.page_url }}
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Checkout
+#         uses: actions/checkout@v3
+#       - name: Setup Python
+#         uses: actions/setup-python@v4
+#         with:
+#           python-version: '3.9.16' 
           
-          cache: 'pip' # caching pip dependencies
-      - name: Install Dependencies
-        run: |
-          cd ./docs/
-          pip install -r requirements.txt
-      - name: Generate Sphinx Docs
-        run: |
-          cd ./docs/
-          make html
-      - name: Setup Pages
-        uses: actions/configure-pages@v2
-      - name: Upload Artifact
-        uses: actions/upload-pages-artifact@v1
-        with:
-          # Upload entire repository
-          path: './docs/build/html'
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v1
+#           cache: 'pip' # caching pip dependencies
+#       - name: Install Dependencies
+#         run: |
+#           cd ./docs/
+#           pip install -r requirements.txt
+#       - name: Generate Sphinx Docs
+#         run: |
+#           cd ./docs/
+#           make html
+#       - name: Setup Pages
+#         uses: actions/configure-pages@v2
+#       - name: Upload Artifact
+#         uses: actions/upload-pages-artifact@v1
+#         with:
+#           # Upload entire repository
+#           path: './docs/build/html'
+#       - name: Deploy to GitHub Pages
+#         id: deployment
+#         uses: actions/deploy-pages@v1

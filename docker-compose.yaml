@@ -13,22 +13,6 @@ services:
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
     networks:
       dev:
-  api:
-    build: .
-    container_name: django-api
-    command:  python manage.py runserver 0.0.0.0:8000
-    volumes:
-      - ./api:/app/
-    ports:
-      - "8000:8000"
-    environment:
-      - POSTGRES_DB=${POSTGRES_DB}
-      - POSTGRES_USER=${POSTGRES_USER}
-      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
-    depends_on:
-      - postgres
-    networks:
-      dev:
   pgadmin:
     image: dpage/pgadmin4
     container_name: pgadmin4
