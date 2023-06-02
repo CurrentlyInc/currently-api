@@ -37,15 +37,16 @@ impl Error {
             // -- Auth
             Self::AuthFailNoAuthTokenCookie
             | Self::AuthFailTokenWrongFormat
-            | Self::AuthFailCtxNotInRequestExt => {
-                (StatusCode::FORBIDDEN, ClientError::NO_AUTH)
-            }
+            | Self::AuthFailCtxNotInRequestExt => (StatusCode::FORBIDDEN, ClientError::NO_AUTH),
             // -- Model
             Self::TicketDeleteFailIdNotFound { .. } => {
                 (StatusCode::BAD_REQUEST, ClientError::INVALID_PARAMS)
             }
             // -- Fallback
-            _ => (StatusCode::INTERNAL_SERVER_ERROR, ClientError::SERVICE_ERROR)
+            _ => (
+                StatusCode::INTERNAL_SERVER_ERROR,
+                ClientError::SERVICE_ERROR,
+            ),
         }
     }
 }

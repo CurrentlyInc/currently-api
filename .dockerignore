@@ -1,5 +1,8 @@
-**/*
-!api/*
-!*.dockerignore
-!requirements.txt
-data/*
+# Ignore everything by default
+*
+
+# Include necessary files and directories
+!/src
+!/Cargo.toml
+!/Cargo.lock
+!/Dockerfile
